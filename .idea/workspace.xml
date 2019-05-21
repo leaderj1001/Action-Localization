@@ -10,15 +10,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/video_crawler/video_crawler.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="133">
-              <caret line="7" column="5" selection-start-line="7" selection-start-column="5" selection-end-line="7" selection-end-column="5" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/config.py">
           <provider selected="true" editor-type-id="text-editor">
@@ -36,8 +27,8 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/video_crawler/video_crawler.py" />
         <option value="$PROJECT_DIR$/config.py" />
+        <option value="$PROJECT_DIR$/video_crawler/video_crawler.py" />
       </list>
     </option>
   </component>
@@ -52,8 +43,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="412" />
-    <option name="y" value="168" />
+    <option name="x" value="1018" />
+    <option name="y" value="136" />
     <option name="width" value="1263" />
     <option name="height" value="1274" />
   </component>
@@ -70,11 +61,6 @@
               <item name="Action-Localization" type="b2602c69:ProjectViewProjectNode" />
               <item name="Action-Localization" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="Action-Localization" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Action-Localization" type="462c0819:PsiDirectoryNode" />
-              <item name="video_crawler" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -82,6 +68,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
@@ -111,7 +98,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="412" y="168" width="1263" height="1274" extended-state="0" />
+    <frame x="1018" y="136" width="1263" height="1274" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Favorites" side_tool="true" />
@@ -137,7 +124,7 @@
     <entry file="file://$PROJECT_DIR$/video_crawler/video_crawler.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="133">
-          <caret line="7" column="5" selection-start-line="7" selection-start-column="5" selection-end-line="7" selection-end-column="5" />
+          <caret line="7" column="19" selection-start-line="7" selection-start-column="19" selection-end-line="7" selection-end-column="19" />
         </state>
       </provider>
     </entry>
