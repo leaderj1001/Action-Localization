@@ -34,7 +34,7 @@ def video_crawler(video_name, mode='trainval', output_dir=''):
 
 
 def ava_crawler(output_dir, args, mode='trainval'):
-    file_path = os.path.join(args.base_dir, 'ava_file_names')
+    file_path = os.path.join(args.base_dir, 'data/ava_file_names')
     video_names = load_txt(file_path, mode)
     output_dir = os.path.join(output_dir, mode)
 
@@ -113,12 +113,10 @@ def video2frame(video_path, output_folder, video_id, resize_min_size=400, fps=25
     video_capture = cv2.VideoCapture(video_path)
     video_fps = video_capture.get(cv2.CAP_PROP_FPS)
     frame_count = int(video_capture.get(cv2.CAP_PROP_FRAME_COUNT))
-    duration = frame_count / video_fps
     frame_time_step = 1 / float(frame_count)
     print("FPS: {}".format(video_fps))
     print("frameCount: {}".format(frame_count))
     print("frame_time_step: {}".format(frame_time_step))
-    # intervals = np.arange(0, 1, 1 / (fps * duration))
 
     current_second = 0
     if video_fps > 29:
