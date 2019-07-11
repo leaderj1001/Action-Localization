@@ -32,6 +32,15 @@ Options:
             └── val_tubelet_annotation.pkl
 ```
 
+## Example
+### raw data
+![init](https://user-images.githubusercontent.com/22078438/61024906-ff73d700-a3e9-11e9-80b6-4dab02e349d0.PNG)
+- You can see that not all data is connected.
+
+### Make Tubelet
+![tubelet](https://user-images.githubusercontent.com/22078438/61024979-26caa400-a3ea-11e9-8bc0-fc2248e3ae59.PNG)
+- Depending on the time, action_id, and person_id, you can see that the related ground truths have created a tubelet.
+
 ## Requirements
 - csv
 - pickle
