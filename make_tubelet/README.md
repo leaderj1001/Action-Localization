@@ -1,5 +1,5 @@
 # Atomic Visual Actions (AVA) Dataset, Make Tubelet
-- 
+- Use the ground truth to sample the tubelets that are related to each other.
 
 ## Data Tree (initial setting)
 ```bash
