@@ -99,17 +99,17 @@ def main(args):
     best_acc = 0.0
     for epoch in range(start_epoch, args.epochs + 1):
         train(model, train_loader, optimizer, criterion, epoch, args)
-        eval_acc = eval(model, args)
-
-        is_best = eval_acc > best_acc
-        best_acc = max(eval_acc, best_acc)
-        save_checkpoint({
-            'epoch': epoch,
-            'arch': args.model_name,
-            'state_dict': model.state_dict(),
-            'best_acc1': best_acc,
-            'optimizer': optimizer.state_dict(),
-        }, is_best)
+        # eval_acc = eval(model, args)
+        #
+        # is_best = eval_acc > best_acc
+        # best_acc = max(eval_acc, best_acc)
+        # save_checkpoint({
+        #     'epoch': epoch,
+        #     'arch': args.model_name,
+        #     'state_dict': model.state_dict(),
+        #     'best_acc1': best_acc,
+        #     'optimizer': optimizer.state_dict(),
+        # }, is_best)
 
 
 if __name__ == '__main__':
