@@ -39,7 +39,7 @@ class DataSetLoader(Dataset):
         data_transpose = data.t()
         data1_1 = data_transpose[4:10, :]
         data1_2 = data_transpose[10:16, :]
-        data1_3 = torch.cat((data_transpose[0:4, :], (data_transpose[16:18, :] + data_transpose[18:19, :]) / 2), dim=0)
+        data1_3 = torch.cat((data_transpose[0:4, :], (data_transpose[16:18, :] + data_transpose[18:20, :]) / 2), dim=0)
         data1_4 = data_transpose[16:22, :]
         data1_5 = data_transpose[22:, :]
 
