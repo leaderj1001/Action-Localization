@@ -32,7 +32,7 @@ def train(model, train_loader, optimizer, criterion, epoch, args):
     train_acc = 0.0
     step = 0
     for x1, x2, x3, x4, x5, xx, target in train_loader:
-        # adjust_learning_rate(optimizer, epoch, args)
+        adjust_learning_rate(optimizer, epoch, args)
         if args.cuda:
             x1, x2, x3, x4, x5, xx, target = x1.cuda(), x2.cuda(), x3.cuda(), x4.cuda(), x5.cuda(), xx.cuda(), target.cuda()
 
@@ -93,8 +93,8 @@ def main(args):
     start_epoch = 0
 
     criterion = nn.CrossEntropyLoss()
-    # optimizer = optim.SGD(model.parameters(), lr=args.lr, momentum=args.momentum, weight_decay=args.weight_decay)
-    optimizer = optim.Adam(model.parameters(), lr=args.lr, weight_decay=args.weight_decay)
+    optimizer = optim.SGD(model.parameters(), lr=args.lr, momentum=args.momentum, weight_decay=args.weight_decay)
+    # optimizer = optim.Adam(model.parameters(), lr=args.lr, weight_decay=args.weight_decay)
 
     best_acc = 0.0
     for epoch in range(start_epoch, args.epochs + 1):
