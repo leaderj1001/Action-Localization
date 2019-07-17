@@ -20,7 +20,8 @@ class DataSetLoader(Dataset):
         self.joint_size = 28
 
     def __getitem__(self, idx):
-        data = torch.zeros((self.temporal_size, self.joint_size))
+        data_hierarchical = torch.zeros((self.temporal_size, self.joint_size))
+        data_traversal = torch.zeros((self.temporal_size, 70))
         values = self.data[idx]
         len_size = len(values)
 
@@ -34,16 +35,24 @@ class DataSetLoader(Dataset):
             joint.append([float(i) for i in values[int(l)][5]])
         joint = torch.tensor(joint)
 
-        data[:len_size, :] = joint
+        data_hierarchical[:len_size, :] = joint
 
-        data_transpose = data.t()
+        data_transpose = data_hierarchical.t()
         data1_1 = data_transpose[4:10, :]
         data1_2 = data_transpose[10:16, :]
         data1_3 = torch.cat((data_transpose[0:4, :], (data_transpose[16:18, :] + data_transpose[18:20, :]) / 2), dim=0)
         data1_4 = data_transpose[16:22, :]
         data1_5 = data_transpose[22:, :]
 
-        data2 = data
+        joint_dict = {}
+        for i in range(14):
+            joint_dict[i] = joint[:, i * 2:i * 2 + 2]
+        traversal = [1, 2, 3, 4, 3, 2, 1, 5, 6, 7, 6, 5, 0, 1, 8, 9, 10, 9, 8, 11, 12, 13, 12, 11, 1]
+
+        for i, each_traval in enumerate(traversal):
+            data_traversal[:len_size, i * 2: i * 2 + 2] = joint_dict[each_traval]
+
+        data2 = data_traversal
         label = torch.tensor(int(values[0][3]) - 1)
 
         return data1_1, data1_2, data1_3, data1_4, data1_5, data2, label
@@ -77,3 +86,11 @@ def load_data(args):
     # )
 
     return train_loader
+
+
+from config import get_args
+args = get_args()
+train_loader = load_data(args)
+
+for x1, x2, x3, x4, x5, xx, target in train_loader:
+    break

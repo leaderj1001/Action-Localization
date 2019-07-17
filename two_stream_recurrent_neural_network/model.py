@@ -1,21 +1,21 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-import torch.nn.init as init
 
 
 class HierarchicalRNN(nn.Module):
     def __init__(self, temporal_size):
         super(HierarchicalRNN, self).__init__()
-        self.hidden_size = [256, 1024]
+        self.hidden_size = [128, 512]
+        self.num_layer = 2
 
-        self.left_arm = nn.LSTM(input_size=temporal_size, hidden_size=self.hidden_size[0], batch_first=True)
-        self.right_arm = nn.LSTM(input_size=temporal_size, hidden_size=self.hidden_size[0], batch_first=True)
-        self.torso = nn.LSTM(input_size=temporal_size, hidden_size=self.hidden_size[1], batch_first=True)
-        self.left_leg = nn.LSTM(input_size=temporal_size, hidden_size=self.hidden_size[0], batch_first=True)
-        self.right_leg = nn.LSTM(input_size=temporal_size, hidden_size=self.hidden_size[0], batch_first=True)
+        self.left_arm = nn.LSTM(input_size=temporal_size, hidden_size=self.hidden_size[0], num_layers=self.num_layer, batch_first=True)
+        self.right_arm = nn.LSTM(input_size=temporal_size, hidden_size=self.hidden_size[0], num_layers=self.num_layer, batch_first=True)
+        self.torso = nn.LSTM(input_size=temporal_size, hidden_size=self.hidden_size[1], num_layers=self.num_layer, batch_first=True)
+        self.left_leg = nn.LSTM(input_size=temporal_size, hidden_size=self.hidden_size[0], num_layers=self.num_layer, batch_first=True)
+        self.right_leg = nn.LSTM(input_size=temporal_size, hidden_size=self.hidden_size[0], num_layers=self.num_layer, batch_first=True)
 
-        self.lstm = nn.LSTM(input_size=self.hidden_size[1] * 2, hidden_size=self.hidden_size[1] * 2, batch_first=True)
+        self.lstm = nn.LSTM(input_size=self.hidden_size[1] * 2, hidden_size=self.hidden_size[1] * 2, num_layers=self.num_layer, batch_first=True)
 
     def forward(self, x1, x2, x3, x4, x5):
         left_arm, left_arm_hidden = self.left_arm(x1)
@@ -26,15 +26,17 @@ class HierarchicalRNN(nn.Module):
 
         out = torch.cat((left_arm, right_arm, torso, left_leg, right_leg), dim=2)
         out, hidden = self.lstm(out)
+
         return out
 
 
 class TraversalSequence(nn.Module):
     def __init__(self, joint_sequence_size):
         super(TraversalSequence, self).__init__()
-        self.hidden_size = 1024
+        self.hidden_size = 512
+        self.num_layer = 2
 
-        self.lstm = nn.LSTM(input_size=joint_sequence_size, hidden_size=self.hidden_size, batch_first=True)
+        self.lstm = nn.LSTM(input_size=joint_sequence_size, hidden_size=self.hidden_size, num_layers=self.num_layer, batch_first=True)
 
     def forward(self, x):
         out, hidden = self.lstm(x)
@@ -42,9 +44,9 @@ class TraversalSequence(nn.Module):
 
 
 class Model(nn.Module):
-    def __init__(self, temporal_size, joint_sequence_size=28, num_classes=80):
+    def __init__(self, temporal_size, joint_sequence_size=70, num_classes=80):
         super(Model, self).__init__()
-        self.hidden_size = 1024
+        self.hidden_size = 512
         self.hierarchical_joints = 6
 
         self.hierarchical_lstm = HierarchicalRNN(temporal_size=temporal_size)
@@ -62,8 +64,8 @@ class Model(nn.Module):
         hierarchical_out = self.hierarchical_dense(hierarchical_out)
         traversal_out = self.traversal_dense(traversal_out)
 
-        hierarchical_out = F.softmax(hierarchical_out, dim=-1)
-        traversal_out = F.softmax(traversal_out, dim=-1)
+        # hierarchical_out = F.softmax(hierarchical_out, dim=-1)
+        # traversal_out = F.softmax(traversal_out, dim=-1)
 
-        out = hierarchical_out * 0.9 + traversal_out * 0.1
+        out = hierarchical_out * 0.6 + traversal_out * 0.4
         return out
