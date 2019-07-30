@@ -22,3 +22,10 @@
     └── ntu_rgb_preprocess.py
 ```
 - Executing ntu_dataset_main.py will generate 'all_train_sample.pkl' and 'all_test_sample.pkl' files.
+
+## Experiment
+
+| Datasets | Model | Accuracy (My Model, Paper Model) | Parameters
+| :---: | :---: | :---: | :---: |
+NTU RGB+D | Two-Stream RNN, 3D transform (x) | 66.42%, 68.6% | 71.1M
+NTU RGB+D | Two-Stream RNN, 3D transform (o) | - , 71.3% | -
